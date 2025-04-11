@@ -12,6 +12,7 @@ project_root/
 ├── main.py                # FastAPI backend
 ├── app.py                 # Streamlit frontend
 ├── requirements.txt       # Project dependencies
+|__ Dockerfile             # Dockerfile
 └── README.md              # Documentation
 ```
 
