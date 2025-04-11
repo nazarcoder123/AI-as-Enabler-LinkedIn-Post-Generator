@@ -5,7 +5,7 @@ import google.generativeai as genai
 import os
 
 # Configure Gemini API
-genai.configure(api_key="AIzaSyB97KS2QgzC95-UNXz9nFBX7_F1UxOFcag")
+genai.configure(api_key="AIzaSyB97KS2QgzC95-UNXz9nFBX7_F1UxOFcag")  # Replace with your actual API key or use st.secrets
 
 # Function to scrape article from URL
 def scrape_text_from_url(url):
@@ -18,7 +18,7 @@ def scrape_text_from_url(url):
     except Exception as e:
         return f"Error fetching content: {str(e)}"
 
-# Summarize with Gemini using a specified perspective
+# Generate a summary using Gemini with a perspective
 def summarize_with_gemini(text, perspective):
     try:
         model = genai.GenerativeModel("gemini-2.0-flash")
@@ -33,15 +33,32 @@ def summarize_with_gemini(text, perspective):
     except Exception as e:
         return f"Error generating summary: {str(e)}"
 
-# Streamlit UI
-st.title("📰 Perspective-Based Blog / News Summarizer with Gemini")
+# Generate LinkedIn post based on the summary and AI as enabler philosophy
+def generate_linkedin_post(summary):
+    try:
+        model = genai.GenerativeModel("gemini-2.0-flash")
+        prompt = (
+            "Generates a LinkedIn post (200-250 words) reflecting the client's 'AI as enabler'' philosophy. "
+            "The post should be insightful, thought-provoking, and based on the following summary of an article. "
+            "Include a light call-to-action at the end, and write in a human, conversational tone suitable for professionals.\n\n"
+            f"Summary:\n{summary}"
+        )
+        response = model.generate_content(prompt)
+        return response.text
+    except Exception as e:
+        return f"Error generating LinkedIn post: {str(e)}"
 
-st.write("Paste a blog/article URL or directly paste the content below to get a perspective-based summary.")
+# ---------------------- Streamlit UI ----------------------
+st.set_page_config(page_title="AI-Powered LinkedIn Post Generator", layout="centered")
+st.title("💼 AI-Powered LinkedIn Post Generator (AI as Enabler)")
 
-url = st.text_input("Enter the URL (optional):")
-pasted_content = st.text_area("Or paste the article content here (optional):", height=300)
+st.markdown("Paste a blog/article URL or content below. Choose a tone and we’ll generate a professional LinkedIn post that reflects the **'AI as an enabler'** mindset.")
 
-# Perspective selection
+# Input fields
+url = st.text_input("🔗 Enter URL (optional):")
+pasted_content = st.text_area("📝 Or paste the article content here:", height=300)
+
+# Perspective options
 perspectives = [
     "Beginner-friendly",
     "Technical expert",
@@ -51,13 +68,14 @@ perspectives = [
     "Business executive",
     "Academic style"
 ]
-selected_perspective = st.selectbox("Choose your perspective for the summary:", perspectives)
+selected_perspective = st.selectbox("🎯 Choose your summary perspective:", perspectives)
 
-if st.button("Generate Summary"):
+# Button to trigger processing
+if st.button("Generate LinkedIn Post"):
     if not url and not pasted_content.strip():
         st.warning("Please provide a URL or paste article content.")
     else:
-        with st.spinner("Generating summary..."):
+        with st.spinner("Generating your LinkedIn post..."):
             if pasted_content.strip():
                 article_text = pasted_content.strip()
             else:
@@ -67,5 +85,7 @@ if st.button("Generate Summary"):
                     st.stop()
 
             summary = summarize_with_gemini(article_text[:6000], selected_perspective)
-            st.subheader(f"📝 Summary ({selected_perspective}):")
-            st.write(summary)
+            linkedin_post = generate_linkedin_post(summary)
+
+            st.subheader("💡 Your LinkedIn Post:")
+            st.write(linkedin_post)
