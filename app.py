@@ -23,7 +23,7 @@ def generate_linkedin_post(article_text, perspective):
     try:
         model = genai.GenerativeModel("gemini-2.0-flash")
         prompt = (
-            f"You are a professional content strategist. Write a LinkedIn post (strictly 200–250 words) "
+            f"You are a professional content strategist. Write a short LinkedIn post"
             f"based on the following article. The post should reflect the philosophy of 'AI as an enabler', "
             f"from the viewpoint of a {perspective}. Avoid generalizations and fluff. Be concise, professional, and engaging. "
             f"End with a light call-to-action.\n\n"
