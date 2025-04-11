@@ -44,6 +44,24 @@ You need to run both the FastAPI backend and Streamlit frontend:
    ```
    This will run the Streamlit app at http://localhost:8501
 
+To run the application using Docker, follow these steps:
+
+1. **Build the Docker Image**:
+   ```bash
+   docker build -t my-app .
+   ```
+   This command builds a Docker image named `my-app` using the `Dockerfile`.
+
+2. **Run the Docker Container**:
+   ```bash
+   docker run -p 8000:8000 -p 8501:8501 my-app
+   ```
+   This maps the container's ports (8000 for FastAPI and 8501 for Streamlit) to your local machine.
+
+3. **Access the Applications**:
+   - FastAPI: Open your browser and go to `http://localhost:8000`.
+   - Streamlit: Open your browser and go to `http://localhost:8501`.
+
 ## Features
 
 - Scrape articles from URLs using BeautifulSoup
@@ -60,7 +78,3 @@ You need to run both the FastAPI backend and Streamlit frontend:
 ## Security Note
 
 The API key for Google Gemini AI is hardcoded in the example. In a production environment, it's recommended to use environment variables or a secure key management system.
-
-## License
-
-[MIT License](LICENSE)
