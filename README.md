@@ -20,8 +20,8 @@ project_root/
 1. Clone the repository
 2. Create a virtual environment:
    ```
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   python -m venv .venv
+   source .venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 3. Install dependencies:
    ```
