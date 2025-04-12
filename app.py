@@ -23,8 +23,8 @@ st.title("💼 AI as Enabler – LinkedIn Post Generator")
 st.markdown("Provide a blog/news/article URL or paste content directly below. We'll generate a 200–250 word LinkedIn post from your selected perspective, reflecting the **AI as enabler** philosophy. You'll also receive a confidence score on how well it aligns with this vision.")
 
 # Input fields
-url = st.text_input("🔗 Enter URL (optional):")
-pasted_content = st.text_area("📝 Or paste the article content here:", height=300)
+url = st.text_input("🔗 Enter URL:")
+pasted_content = st.text_area("📝 Or paste the article content here (optional):", height=300)
 
 # Perspective options
 perspectives = [
