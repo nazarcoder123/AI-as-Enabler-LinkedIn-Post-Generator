@@ -79,3 +79,6 @@ To run the application using Docker, follow these steps:
 ## Security Note
 
 The API key for Google Gemini AI is hardcoded in the example. In a production environment, it's recommended to use environment variables or a secure key management system.
+
+## Loom Video
+ Link: https://www.loom.com/share/2a358b3f910e48febeb1433019532658?sid=d396d41f-8471-486b-b54e-1d13ddf32445 
