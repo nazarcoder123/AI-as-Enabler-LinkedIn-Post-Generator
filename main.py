@@ -24,11 +24,7 @@ def generate_post(text, perspective):
     return post, score
 
 @app.post("/generate-post")
-async def create_post(
-    url: str = Body(default=None),
-    content: str = Body(default=None),
-    perspective: str = Body(...),
-):
+async def create_post(url: str = Body(default=None),content: str = Body(default=None),perspective: str = Body(...),):
     if not content and not url:
         raise HTTPException(status_code=400, detail="Provide URL or content.")
     text = content.strip() if content else scrape_text(url)
@@ -37,7 +33,4 @@ async def create_post(
     text = text[:10000]
 
     post, score = generate_post(text, perspective)
-    return {
-        "linkedin_post": post,
-        "confidence_score": score
-    }
+    return {"linkedin_post": post,"confidence_score": score}
