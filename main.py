@@ -16,8 +16,8 @@ def scrape_text(url):
     return " ".join([p.text for p in BeautifulSoup(r.content, "html.parser").find_all("p")])
 
 def generate_post(text, perspective): 
-    model = genai.GenerativeModel("gemini-2.0-flash")
-    prompt = f"""You are a professional LinkedIn strategist. Write a 200–250 word post from a {perspective}'s view on 'AI as an enabler', based on this article:\n{text}\nAvoid fluff. Be insightful, persuasive, and include a call-to-action."""
+    model = genai.GenerativeModel("gemini-2.5-pro-exp-03-25") # gemini-2.0-flash
+    prompt = f"""You are a professional LinkedIn strategist. Write a 200–250 word post from a {perspective}'s view on 'AI as an enabler', based on this article:\n{text}\nAvoid fluff. Be insightful, persuasive, and include a call-to-action.Do not include a word count in your response"""
     post = model.generate_content(prompt).text.strip()
     score_prompt = f"""Rate this post (1–100) on how well it aligns with 'AI as an enabler':\n{post}\nReturn only a number."""
     score = model.generate_content(score_prompt).text.strip()
