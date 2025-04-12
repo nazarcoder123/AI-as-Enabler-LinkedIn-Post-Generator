@@ -28,13 +28,16 @@ pasted_content = st.text_area("📝 Or paste the article content here:", height=
 
 # Perspective options
 perspectives = [
-    "Beginner-friendly",
-    "Technical expert",
-    "Product/Marketing focus",
-    "Critical analysis",
-    "Neutral/Objective",
-    "Business executive",
-    "Academic style"
+    "Primary care physician",
+    "Specialist/Surgeon",
+    "Healthcare administrator",
+    "Medical researcher/scientist",
+    "Patient-centered clinician",
+    "Technology-skeptical physician",
+    "Technology-enthusiastic physician",
+    "Rural/underserved healthcare provider",
+    "Medical educator",
+    "Public health focused"
 ]
 selected_perspective = st.selectbox("🎯 Choose your perspective:", perspectives)
 
